@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/docTruyen" android:icon="@drawable/book" android:title="DOC TRUYEN" />
-    <item android:id="@+id/lichSu" android:icon="@drawable/clock" android:title="LICH SU" />
-    <item android:id="@+id/yeuThich" android:icon="@drawable/heart" android:title="YEU THICH"  />
+    <item android:id="@+id/itemDocTruyen" android:icon="@drawable/book" android:title="DOC TRUYEN" />
+    <item android:id="@+id/itemLichSu" android:icon="@drawable/clock" android:title="LICH SU" />
+    <item android:id="@+id/itemYeuThich" android:icon="@drawable/heart" android:title="YEU THICH"  />
 </menu>
