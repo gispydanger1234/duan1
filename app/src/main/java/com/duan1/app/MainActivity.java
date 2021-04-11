@@ -9,18 +9,25 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import database.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
+    DBHelper dbHelper=new DBHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        DBHelper dbHelper=new DBHelper(this);
+
         dbHelper.addDB();
         BottomNavigationView navigationView=findViewById(R.id.bottomNavi);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Doc_Truyen_Fragment()).commit();
         navigationView.setOnNavigationItemSelectedListener(navListener);
+;
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener= new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -32,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.itemLichSu:
                     selectedFragment= new Lich_Su_Fragment();
+                    dbHelper.updateTruyenYeuThich("Cô Ấy Là Để Sủng!");
+                    System.out.println("00100") ;
                     break;
                 case R.id.itemYeuThich:
                     selectedFragment= new Doc_Truyen_Fragment();
