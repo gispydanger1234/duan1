@@ -37,15 +37,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.itemLichSu:
                     selectedFragment= new Lich_Su_Fragment();
-                    dbHelper.updateTruyenYeuThich("Cô Ấy Là Để Sủng!",getApplicationContext());
-                    System.out.println(dbHelper.searchByTruyen("",getApplicationContext()).size()+"blah");
                     break;
                 case R.id.itemYeuThich:
                     selectedFragment= new YeuThichFragment();
                     break;
             }
-            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
-            System.out.println(dbHelper.searchByTheLoai("ngôn",getApplicationContext()).size()+"blah");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
             return true;
 
         }

@@ -68,7 +68,7 @@ public class DBHelper extends AppCompatActivity {
 
     public ArrayList<Obj_truyen> showAllTruyen(Context context){
         this.context=context;
-        sqLiteDatabase=openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
+        sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",null,null,null,null,null,null);
         truyenList.clear();
         while (cursor.moveToNext()){

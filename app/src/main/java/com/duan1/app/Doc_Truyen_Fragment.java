@@ -87,7 +87,7 @@ public class Doc_Truyen_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_doc__truyen_, container, false);
         initView(view);
         objTruyens = new ArrayList<>();
-        objTruyens = dbHelper.searchByTruyen("",getActivity());
+        objTruyens = dbHelper.showAllTruyen(getActivity());
         DoctruyenAdapter adapter = new DoctruyenAdapter(getActivity(),objTruyens);
         lvDoctruyen.setAdapter(adapter);
         return view;
