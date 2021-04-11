@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView=findViewById(R.id.bottomNavi);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Doc_Truyen_Fragment()).commit();
         navigationView.setOnNavigationItemSelectedListener(navListener);
-;
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener= new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -35,18 +34,18 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.itemDocTruyen:
                     selectedFragment= new Doc_Truyen_Fragment();
-
-
                     break;
                 case R.id.itemLichSu:
                     selectedFragment= new Lich_Su_Fragment();
-                    dbHelper.updateTruyenYeuThich("Cô Ấy Là Để Sủng!");
+                    dbHelper.updateTruyenYeuThich("Cô Ấy Là Để Sủng!",getApplicationContext());
+                    System.out.println(dbHelper.searchByTruyen("",getApplicationContext()).size()+"blah");
                     break;
                 case R.id.itemYeuThich:
                     selectedFragment= new YeuThichFragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+            System.out.println(dbHelper.searchByTheLoai("ngôn",getApplicationContext()).size()+"blah");
             return true;
 
         }

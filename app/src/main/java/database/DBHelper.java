@@ -66,7 +66,8 @@ public class DBHelper extends AppCompatActivity {
         }
     }
 
-    public ArrayList<Obj_truyen> showAllTruyen(){
+    public ArrayList<Obj_truyen> showAllTruyen(Context context){
+        this.context=context;
         sqLiteDatabase=openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",null,null,null,null,null,null);
         truyenList.clear();
@@ -81,7 +82,8 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return truyenList;
     }
-    public ArrayList<Obj_truyen> searchByTruyen(String truyen){
+    public ArrayList<Obj_truyen> searchByTruyen(String truyen,Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         //Cursor cursor=sqLiteDatabase.query("table_truyen",null,"ten =?",new String[]{truyen},null,null,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",new String[]{},"ten like '%"+truyen+"%'",null,null,null,null);
@@ -97,7 +99,8 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return truyenSearchList;
     }
-    public ArrayList<Obj_truyen> searchByTacGia(String tacGia){
+    public ArrayList<Obj_truyen> searchByTacGia(String tacGia,Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         //Cursor cursor=sqLiteDatabase.query("table_truyen",null,"tacgia =?",new String[]{tacGia},null,null,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",new String[]{},"tacgia like '%"+tacGia+"%'",null,null,null,null);
@@ -113,7 +116,8 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return tacGiaSearchList;
     }
-    public ArrayList<Obj_truyen> searchByTheLoai(String theLoai){
+    public ArrayList<Obj_truyen> searchByTheLoai(String theLoai,Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         //Cursor cursor=sqLiteDatabase.query("table_truyen",null,"theloai =?",new String[]{theLoai},null,null,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",new String[]{},"theloai like '%"+theLoai+"%'",null,null,null,null);
@@ -129,7 +133,8 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return theLoaiSearchList;
     }
-    public ArrayList<Obj_the_loai> theLoaiList(){
+    public ArrayList<Obj_the_loai> theLoaiList(Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_the_loai",null,null,null,null,null,null);
         theLoaiList.clear();
@@ -140,7 +145,8 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return theLoaiList;
     }
-    public ArrayList<Obj_chuong> chuongList(String truyen){
+    public ArrayList<Obj_chuong> chuongList(String truyen,Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_chuong",null,"truyen=?",new String[]{truyen},null,null,null);
         chuongList.clear();
@@ -154,7 +160,8 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return chuongList;
     }
-    public ArrayList<Obj_truyen> showAllYeuThichList(){
+    public ArrayList<Obj_truyen> showAllYeuThichList(Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",null,"yeuthich=?",new String[]{"1"},null,null,null);
         yeuThichList.clear();
@@ -169,7 +176,8 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return yeuThichList;
     }
-    public ArrayList<Obj_truyen> updateTruyenYeuThich(String truyen){
+    public ArrayList<Obj_truyen> updateTruyenYeuThich(String truyen,Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",null,"ten=?",new String[]{truyen},null,null,null);
         cursor.moveToFirst();
@@ -193,14 +201,15 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return null;
     }
-    public ArrayList<Obj_truyen> searchBySearchBar(String timKiem, String theo, String theLoai){
+    public ArrayList<Obj_truyen> searchBySearchBar(String timKiem, String theo, String theLoai,Context context){
+        this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         switch (theo){
             case "Tên Truyện":
-                for (int i = 0; i <searchByTruyen(timKiem).size() ; i++) {
-                    Obj_truyen obj_truyen=searchByTruyen(timKiem).get(i);
-                    for (int j = 0; j <searchByTheLoai(theLoai).size() ; j++) {
-                        Obj_truyen obj_truyen1=searchByTheLoai(theLoai).get(j);
+                for (int i = 0; i <searchByTruyen(timKiem,context).size() ; i++) {
+                    Obj_truyen obj_truyen=searchByTruyen(timKiem,context).get(i);
+                    for (int j = 0; j <searchByTheLoai(theLoai,context).size() ; j++) {
+                        Obj_truyen obj_truyen1=searchByTheLoai(theLoai,context).get(j);
                         if (obj_truyen.getTen().equals(obj_truyen1.getTen())){
                             searchBarList.add(obj_truyen);
                         }
@@ -208,10 +217,10 @@ public class DBHelper extends AppCompatActivity {
                 }
                 break;
             case "Tác Giả":
-                for (int i = 0; i <searchByTacGia(timKiem).size() ; i++) {
-                    Obj_truyen obj_truyen=searchByTacGia(timKiem).get(i);
-                    for (int j = 0; j <searchByTheLoai(theLoai).size() ; j++) {
-                        Obj_truyen obj_truyen1=searchByTheLoai(theLoai).get(j);
+                for (int i = 0; i <searchByTacGia(timKiem,context).size() ; i++) {
+                    Obj_truyen obj_truyen=searchByTacGia(timKiem,context).get(i);
+                    for (int j = 0; j <searchByTheLoai(theLoai,context).size() ; j++) {
+                        Obj_truyen obj_truyen1=searchByTheLoai(theLoai,context).get(j);
                         if (obj_truyen.getTen().equals(obj_truyen1.getTen())){
                             searchBarList.add(obj_truyen);
                             break;
