@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
         dbHelper.addDB();
         BottomNavigationView navigationView=findViewById(R.id.bottomNavi);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Doc_Truyen_Fragment()).commit();
@@ -36,14 +35,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.itemDocTruyen:
                     selectedFragment= new Doc_Truyen_Fragment();
+
+
                     break;
                 case R.id.itemLichSu:
                     selectedFragment= new Lich_Su_Fragment();
                     dbHelper.updateTruyenYeuThich("Cô Ấy Là Để Sủng!");
-                    System.out.println("00100") ;
                     break;
                 case R.id.itemYeuThich:
-                    selectedFragment= new Doc_Truyen_Fragment();
+                    selectedFragment= new YeuThichFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();

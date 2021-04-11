@@ -1,64 +1,106 @@
 package com.duan1.app;
 
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Doc_Truyen_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import database.DBHelper;
+
+
 public class Doc_Truyen_Fragment extends Fragment {
+    private EditText editTextTextPersonName2;
+    private EditText editTextTextPersonName3;
+    private EditText editTextTextPersonName4;
+    private ImageView imageView3;
+    private TextView textView;
+    private TextView textView2;
+    private ListView lvDoctruyen;
+    private DBHelper dbHelper  =new DBHelper(getActivity());;
+    private List<Obj_truyen> objTruyens;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public class DoctruyenAdapter extends BaseAdapter {
+        private Context context;
+        private List<Obj_truyen> truyenList;
+        private ImageView imageView;
+        private TextView textView3;
+        private TextView textView4;
+        private TextView textView5;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+        public DoctruyenAdapter(Context context, List<Obj_truyen> truyenList) {
+            this.context = context;
+            this.truyenList = truyenList;
+        }
 
-    public Doc_Truyen_Fragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Doc_Truyen_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Doc_Truyen_Fragment newInstance(String param1, String param2) {
-        Doc_Truyen_Fragment fragment = new Doc_Truyen_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        @Override
+        public int getCount() {
+            return truyenList.size();
+        }
+
+        @Override
+        public Obj_truyen getItem(int position) {
+            return truyenList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_truyen, parent, false);
+            imageView = (ImageView) convertView.findViewById(R.id.imageView);
+            textView3 = (TextView) convertView.findViewById(R.id.textView3);
+            textView4 = (TextView) convertView.findViewById(R.id.textView4);
+            textView5 = (TextView) convertView.findViewById(R.id.textView5);
+            textView3.setText(truyenList.get(position).ten);
+            textView4.setText(truyenList.get(position).tacGia);
+            textView5.setText(truyenList.get(position).theLoai);
+            return convertView;
+
+        }
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doc__truyen_, container, false);
+        View view = inflater.inflate(R.layout.fragment_doc__truyen_, container, false);
+        initView(view);
+        objTruyens = new ArrayList<>();
+//        dbHelper.addDB();
+//        objTruyens = dbHelper.showAllTruyen();
+        DoctruyenAdapter adapter = new DoctruyenAdapter(getActivity(),objTruyens);
+        lvDoctruyen.setAdapter(adapter);
+        return view;
+    }
+
+    private void initView(View view) {
+        editTextTextPersonName2 = (EditText) view.findViewById(R.id.editTextTextPersonName2);
+        editTextTextPersonName3 = (EditText) view.findViewById(R.id.editTextTextPersonName3);
+        editTextTextPersonName4 = (EditText) view.findViewById(R.id.editTextTextPersonName4);
+        imageView3 = (ImageView) view.findViewById(R.id.imageView3);
+        textView = (TextView) view.findViewById(R.id.textView);
+        textView2 = (TextView) view.findViewById(R.id.textView2);
+        lvDoctruyen = (ListView) view.findViewById(R.id.lvDoctruyen);
     }
 }

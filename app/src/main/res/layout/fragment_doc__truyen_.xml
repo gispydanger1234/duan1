@@ -29,7 +29,6 @@
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/editTextTextPersonName3"
             android:layout_width="114dp"
@@ -106,6 +105,7 @@
         android:layout_height="621dp">
 
         <ListView
+            android:id="@+id/lvDoctruyen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
