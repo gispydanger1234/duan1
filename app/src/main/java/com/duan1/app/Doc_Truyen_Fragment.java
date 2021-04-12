@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,7 +31,7 @@ public class Doc_Truyen_Fragment extends Fragment {
     private TextView textView;
     private TextView textView2;
     private ListView lvDoctruyen;
-    private DBHelper dbHelper  =new DBHelper(getActivity());;
+    private DBHelper dbHelper  =new DBHelper(getActivity());
     private List<Obj_truyen> objTruyens;
     public class DoctruyenAdapter extends BaseAdapter {
         private Context context;
@@ -92,13 +93,12 @@ public class Doc_Truyen_Fragment extends Fragment {
         System.out.println(objTruyens.size());
         DoctruyenAdapter adapter = new DoctruyenAdapter(getActivity(),objTruyens);
         lvDoctruyen.setAdapter(adapter);
-        lvDoctruyen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,new DetailTruyenFragment()).addToBackStack(null).commit();
-
-            }
-        });
+       lvDoctruyen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               getFragmentManager().beginTransaction().replace(R.id.fragment_container,new DetailTruyenFragment(objTruyens.get(position).getTen())).addToBackStack(null).commit();
+           }
+       });
 
         return view;
     }

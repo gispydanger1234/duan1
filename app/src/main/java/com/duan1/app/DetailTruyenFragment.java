@@ -28,10 +28,16 @@ public class DetailTruyenFragment extends Fragment {
     private ListView lvChuong;
     private DBHelper dbHelper = new DBHelper(getActivity());
     private List<Obj_chuong> obj_chuongs;
+    public String tenTruyen;
+
+    public DetailTruyenFragment(String truyen) {
+        this.tenTruyen = truyen;
+    }
 
     public class ChuongAdapter extends BaseAdapter {
         private Context context;
         private List<Obj_chuong> chuongList;
+        private String truyen;
         private TextView tvChuong;
 
         public ChuongAdapter(Context context, List<Obj_chuong> chuongList) {
@@ -58,8 +64,8 @@ public class DetailTruyenFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_chuong, parent, false);
             tvChuong = (TextView) convertView.findViewById(R.id.tvChuong);
-
-            return null;
+            tvChuong.setText(chuongList.get(position).getChuong()+"  "+chuongList.get(position).getTenChuong());
+            return convertView;
         }
     }
 
@@ -67,9 +73,9 @@ public class DetailTruyenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_truyen, container, false);
-
+        initView(view);
         obj_chuongs = new ArrayList<>();
-        obj_chuongs = dbHelper.chuongList;
+        obj_chuongs = dbHelper.showAllChuongList(tenTruyen,getActivity());
         ChuongAdapter chuongAdapter = new ChuongAdapter(getActivity(),obj_chuongs);
         lvChuong.setAdapter(chuongAdapter);
         return view;
@@ -84,4 +90,5 @@ public class DetailTruyenFragment extends Fragment {
         tvTomtat = (TextView) view.findViewById(R.id.tvTomtat);
         lvChuong = (ListView) view.findViewById(R.id.lvChuong);
     }
+
 }
