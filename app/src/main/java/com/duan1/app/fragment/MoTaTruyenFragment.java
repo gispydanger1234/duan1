@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -76,12 +77,18 @@ public class MoTaTruyenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detail_truyen, container, false);
+        View view = inflater.inflate(R.layout.fragment_mo_ta_truyen, container, false);
         initView(view);
         obj_chuongs = new ArrayList<>();
         obj_chuongs = dbHelper.showAllChuongList(obj_truyen.getTen(), getActivity());
         ChuongAdapter chuongAdapter = new ChuongAdapter(getActivity(), obj_chuongs);
         lvChuong.setAdapter(chuongAdapter);
+        lvChuong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
         imgAnh.setImageBitmap(obj_truyen.getBitmap());
         tvTentruyen.setText(obj_truyen.getTen());
         tvTacgia.setText(obj_truyen.getTacGia());

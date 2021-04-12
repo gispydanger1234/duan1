@@ -88,7 +88,7 @@ public class DanhSachTruyenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_doc__truyen_, container, false);
+        View view = inflater.inflate(R.layout.fragment_danh_sach_truyen, container, false);
         initView(view);
         objTruyens = new ArrayList<>();
         objTruyens = dbHelper.showAllTruyen(getActivity());
