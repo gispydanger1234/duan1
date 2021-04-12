@@ -86,7 +86,7 @@ public class MoTaTruyenFragment extends Fragment {
         lvChuong.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, new DocTruyenFragment( obj_chuongs, position)).addToBackStack(null).commit();
             }
         });
         imgAnh.setImageBitmap(obj_truyen.getBitmap());

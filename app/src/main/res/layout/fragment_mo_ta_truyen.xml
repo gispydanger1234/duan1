@@ -27,23 +27,45 @@
         android:fontFamily="@font/sitka_banner"
         android:text="NGẠO THẾ ĐAN THẦN"
         android:textColor="@color/text_color"
-        android:textSize="15dp"
+        android:textSize="20dp"
         app:layout_constraintLeft_toRightOf="@+id/imgAnh"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <TextView
+        android:id="@+id/tvTg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sitka_banner"
+        android:text="Tác giả: "
+        android:textColor="@color/text_color"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/imgAnh"
+        app:layout_constraintTop_toBottomOf="@+id/tvTentruyen" />
     <TextView
         android:id="@+id/tvTacgia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:capitalize="characters"
         android:fontFamily="@font/sitka_banner"
         android:text="Ngạo Thế Đan Thần"
         android:textColor="@color/text_color"
-        android:textSize="10dp"
-        app:layout_constraintStart_toEndOf="@+id/imgAnh"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/tvTg"
         app:layout_constraintTop_toBottomOf="@+id/tvTentruyen" />
+    <TextView
+        android:id="@+id/tvTl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sitka_banner"
+        android:text="Thể loại: "
+        android:textColor="@color/text_color"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/imgAnh"
+        app:layout_constraintTop_toBottomOf="@+id/tvTacgia" />
 
     <TextView
         android:id="@+id/tvTheloai"
@@ -55,8 +77,8 @@
         android:fontFamily="@font/sitka_banner"
         android:text="Ngạo Thế Đan Thần"
         android:textColor="@color/text_color"
-        android:textSize="10dp"
-        app:layout_constraintStart_toEndOf="@+id/imgAnh"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/tvTl"
         app:layout_constraintTop_toBottomOf="@+id/tvTacgia" />
     <ImageView
         android:id="@+id/imgYeuthich"
