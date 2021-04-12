@@ -1,10 +1,10 @@
 package com.duan1.app.model;
 
-public class Obj_chuong {
-    int chuong;
-    String truyen,tenChuong,noiDung;
+public class Chuong {
+    private int chuong;
+    private String truyen, tenChuong, noiDung;
 
-    public Obj_chuong(int chuong, String truyen, String tenChuong, String noiDung) {
+    public Chuong(int chuong, String truyen, String tenChuong, String noiDung) {
         this.chuong = chuong;
         this.truyen = truyen;
         this.tenChuong = tenChuong;

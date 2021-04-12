@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.duan1.app.model.Obj_chuong;
-import com.duan1.app.model.Obj_truyen;
+import com.duan1.app.model.Chuong;
+import com.duan1.app.model.Truyen;
 import com.duan1.app.R;
 
 import java.util.ArrayList;
@@ -31,20 +31,20 @@ public class MoTaTruyenFragment extends Fragment {
     private TextView tvTomtat;
     private ListView lvChuong;
     private DBHelper dbHelper = new DBHelper(getActivity());
-    private List<Obj_chuong> obj_chuongs;
-    public Obj_truyen obj_truyen;
+    private List<Chuong> obj_chuongs;
+    public Truyen obj_truyen;
 
-    public MoTaTruyenFragment(Obj_truyen obj_truyen) {
+    public MoTaTruyenFragment(Truyen obj_truyen) {
         this.obj_truyen = obj_truyen;
     }
 
     public class ChuongAdapter extends BaseAdapter {
         private Context context;
-        private List<Obj_chuong> chuongList;
+        private List<Chuong> chuongList;
         private String truyen;
         private TextView tvChuong;
 
-        public ChuongAdapter(Context context, List<Obj_chuong> chuongList) {
+        public ChuongAdapter(Context context, List<Chuong> chuongList) {
             this.context = context;
             this.chuongList = chuongList;
         }

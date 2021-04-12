@@ -4,13 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
-public class Obj_truyen {
-    public String ten,tacGia,theLoai,moTa;
-    public String image;
-    public int yeuThich;
+public class Truyen {
+    private String ten,tacGia,theLoai,moTa;
+    private String image;
+    private int yeuThich;
 
 
-    public Obj_truyen(String ten, String tacGia, String theLoai, String moTa, int yeuThich, String image ) {
+    public Truyen(String ten, String tacGia, String theLoai, String moTa, int yeuThich, String image ) {
         this.ten = ten;
         this.tacGia = tacGia;
         this.theLoai = theLoai;

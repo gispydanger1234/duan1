@@ -15,7 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.duan1.app.model.Obj_truyen;
+import com.duan1.app.model.Truyen;
 import com.duan1.app.R;
 
 import java.util.ArrayList;
@@ -33,17 +33,17 @@ public class DanhSachTruyenFragment extends Fragment {
     private TextView textView2;
     private ListView lvDoctruyen;
     private DBHelper dbHelper = new DBHelper(getActivity());
-    private List<Obj_truyen> objTruyens;
+    private List<Truyen> objTruyens;
 
     public class DoctruyenAdapter extends BaseAdapter {
         private Context context;
-        private List<Obj_truyen> truyenList;
+        private List<Truyen> truyenList;
         private ImageView imageView;
         private TextView textView3;
         private TextView textView4;
         private TextView textView5;
 
-        public DoctruyenAdapter(Context context, List<Obj_truyen> truyenList) {
+        public DoctruyenAdapter(Context context, List<Truyen> truyenList) {
             this.context = context;
             this.truyenList = truyenList;
         }
@@ -55,7 +55,7 @@ public class DanhSachTruyenFragment extends Fragment {
         }
 
         @Override
-        public Obj_truyen getItem(int position) {
+        public Truyen getItem(int position) {
             return truyenList.get(position);
         }
 
@@ -71,8 +71,8 @@ public class DanhSachTruyenFragment extends Fragment {
             textView3 = (TextView) convertView.findViewById(R.id.tvTentruyen);
             textView4 = (TextView) convertView.findViewById(R.id.tvTacgia);
             textView5 = (TextView) convertView.findViewById(R.id.tvTheloai);
-            textView3.setText(truyenList.get(position).ten);
-            textView4.setText(truyenList.get(position).tacGia);
+            textView3.setText(truyenList.get(position).getTen());
+            textView4.setText(truyenList.get(position).getTacGia());
             imageView.setImageBitmap(truyenList.get(position).getBitmap());
             return convertView;
 
