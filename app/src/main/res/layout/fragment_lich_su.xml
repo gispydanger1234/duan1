@@ -8,13 +8,18 @@
     tools:context=".fragment.DanhSachTruyenFragment"
     android:orientation="vertical">
 <TextView
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="ádasdasd"
-    android:textSize="30dp"
+    android:text="LỊCH SỬ"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:layout_marginTop="20dp"
+    android:layout_margin="8dp"
+    android:textSize="20dp"
     />
     <ListView
-        android:id="@+id/lvList"
+        android:id="@+id/rvLichsu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
 </LinearLayout>
