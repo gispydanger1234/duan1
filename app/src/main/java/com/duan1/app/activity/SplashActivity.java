@@ -1,4 +1,4 @@
-package com.duan1.app;
+package com.duan1.app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
-public class Loading extends AppCompatActivity {
+import com.duan1.app.R;
+
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,7 @@ public class Loading extends AppCompatActivity {
             @Override
             public void onFinish() {
                 Intent intent;
-                intent=new Intent(Loading.this,MainActivity.class);
+                intent=new Intent(SplashActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         }.start();

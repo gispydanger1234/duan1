@@ -1,4 +1,4 @@
-package com.duan1.app;
+package com.duan1.app.model;
 
 public class Obj_Lich_Su {
     public Obj_Lich_Su(String ten, int chuong,String time) {

@@ -1,4 +1,4 @@
-package com.duan1.app;
+package com.duan1.app.model;
 
 public class Obj_the_loai {
     String ten;

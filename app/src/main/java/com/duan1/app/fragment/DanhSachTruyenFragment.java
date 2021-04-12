@@ -1,4 +1,4 @@
-package com.duan1.app;
+package com.duan1.app.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,19 +11,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
+import com.duan1.app.model.Obj_truyen;
+import com.duan1.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import database.DBHelper;
+import com.duan1.app.database.DBHelper;
 
 
-public class Doc_Truyen_Fragment extends Fragment {
+public class DanhSachTruyenFragment extends Fragment {
     private EditText editTextTextPersonName2;
     private EditText editTextTextPersonName3;
     private EditText editTextTextPersonName4;
@@ -31,8 +32,9 @@ public class Doc_Truyen_Fragment extends Fragment {
     private TextView textView;
     private TextView textView2;
     private ListView lvDoctruyen;
-    private DBHelper dbHelper  =new DBHelper(getActivity());
+    private DBHelper dbHelper = new DBHelper(getActivity());
     private List<Obj_truyen> objTruyens;
+
     public class DoctruyenAdapter extends BaseAdapter {
         private Context context;
         private List<Obj_truyen> truyenList;
@@ -91,14 +93,14 @@ public class Doc_Truyen_Fragment extends Fragment {
         objTruyens = new ArrayList<>();
         objTruyens = dbHelper.showAllTruyen(getActivity());
         System.out.println(objTruyens.size());
-        DoctruyenAdapter adapter = new DoctruyenAdapter(getActivity(),objTruyens);
+        DoctruyenAdapter adapter = new DoctruyenAdapter(getActivity(), objTruyens);
         lvDoctruyen.setAdapter(adapter);
-       lvDoctruyen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               getFragmentManager().beginTransaction().replace(R.id.fragment_container,new DetailTruyenFragment(objTruyens.get(position).getTen())).addToBackStack(null).commit();
-           }
-       });
+        lvDoctruyen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoTaTruyenFragment(objTruyens.get(position))).addToBackStack(null).commit();
+            }
+        });
 
         return view;
     }

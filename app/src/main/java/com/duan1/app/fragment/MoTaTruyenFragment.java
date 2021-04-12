@@ -1,4 +1,4 @@
-package com.duan1.app;
+package com.duan1.app.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,12 +12,16 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.duan1.app.model.Obj_chuong;
+import com.duan1.app.model.Obj_truyen;
+import com.duan1.app.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import database.DBHelper;
+import com.duan1.app.database.DBHelper;
 
-public class DetailTruyenFragment extends Fragment {
+public class MoTaTruyenFragment extends Fragment {
 
     private ImageView imgAnh;
     private TextView tvTacgia;
@@ -28,10 +32,10 @@ public class DetailTruyenFragment extends Fragment {
     private ListView lvChuong;
     private DBHelper dbHelper = new DBHelper(getActivity());
     private List<Obj_chuong> obj_chuongs;
-    public String tenTruyen;
+    public Obj_truyen obj_truyen;
 
-    public DetailTruyenFragment(String truyen) {
-        this.tenTruyen = truyen;
+    public MoTaTruyenFragment(Obj_truyen obj_truyen) {
+        this.obj_truyen = obj_truyen;
     }
 
     public class ChuongAdapter extends BaseAdapter {
@@ -64,7 +68,7 @@ public class DetailTruyenFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_chuong, parent, false);
             tvChuong = (TextView) convertView.findViewById(R.id.tvChuong);
-            tvChuong.setText(chuongList.get(position).getChuong()+"  "+chuongList.get(position).getTenChuong());
+            tvChuong.setText(chuongList.get(position).getChuong() + "  " + chuongList.get(position).getTenChuong());
             return convertView;
         }
     }
@@ -75,9 +79,14 @@ public class DetailTruyenFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail_truyen, container, false);
         initView(view);
         obj_chuongs = new ArrayList<>();
-        obj_chuongs = dbHelper.showAllChuongList(tenTruyen,getActivity());
-        ChuongAdapter chuongAdapter = new ChuongAdapter(getActivity(),obj_chuongs);
+        obj_chuongs = dbHelper.showAllChuongList(obj_truyen.getTen(), getActivity());
+        ChuongAdapter chuongAdapter = new ChuongAdapter(getActivity(), obj_chuongs);
         lvChuong.setAdapter(chuongAdapter);
+        imgAnh.setImageBitmap(obj_truyen.getBitmap());
+        tvTentruyen.setText(obj_truyen.getTen());
+        tvTacgia.setText(obj_truyen.getTacGia());
+        tvTheloai.setText(obj_truyen.getTheLoai());
+        tvTomtat.setText(obj_truyen.getMoTa());
         return view;
     }
 
