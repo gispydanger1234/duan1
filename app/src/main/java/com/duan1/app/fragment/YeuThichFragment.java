@@ -12,29 +12,6 @@ import com.duan1.app.R;
 
 
 public class YeuThichFragment extends Fragment {
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public YeuThichFragment() {
-
-    }
-
-
-    public static YeuThichFragment newInstance(String param1, String param2) {
-        YeuThichFragment fragment = new YeuThichFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

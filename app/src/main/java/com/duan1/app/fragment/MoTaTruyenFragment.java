@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.duan1.app.adapter.ChuongAdapter;
 import com.duan1.app.model.Chuong;
 import com.duan1.app.model.Truyen;
 import com.duan1.app.R;
@@ -39,40 +40,7 @@ public class MoTaTruyenFragment extends Fragment {
         this.obj_truyen = obj_truyen;
     }
 
-    public class ChuongAdapter extends BaseAdapter {
-        private Context context;
-        private List<Chuong> chuongList;
-        private String truyen;
-        private TextView tvChuong;
 
-        public ChuongAdapter(Context context, List<Chuong> chuongList) {
-            this.context = context;
-            this.chuongList = chuongList;
-        }
-
-        @Override
-        public int getCount() {
-            return chuongList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return chuongList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_chuong, parent, false);
-            tvChuong = (TextView) convertView.findViewById(R.id.tvChuong);
-            tvChuong.setText(chuongList.get(position).getChuong() + "  " + chuongList.get(position).getTenChuong());
-            return convertView;
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,6 +62,12 @@ public class MoTaTruyenFragment extends Fragment {
         tvTacgia.setText(obj_truyen.getTacGia());
         tvTheloai.setText(obj_truyen.getTheLoai());
         tvTomtat.setText(obj_truyen.getMoTa());
+        imgYeuthich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgYeuthich.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite));
+            }
+        });
         return view;
     }
 
