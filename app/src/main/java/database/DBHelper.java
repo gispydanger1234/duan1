@@ -8,6 +8,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.duan1.app.Obj_Lich_Su;
 import com.duan1.app.Obj_chuong;
 import com.duan1.app.Obj_the_loai;
 import com.duan1.app.Obj_truyen;
@@ -16,7 +17,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class DBHelper extends AppCompatActivity {
     public ArrayList<Obj_truyen> truyenList=new ArrayList<>();
@@ -27,6 +31,7 @@ public class DBHelper extends AppCompatActivity {
     public ArrayList<Obj_chuong> chuongList=new ArrayList<>();
     public ArrayList<Obj_truyen> searchBarList=new ArrayList<>();
     public ArrayList<Obj_truyen> yeuThichList=new ArrayList<>();
+    public ArrayList<Obj_Lich_Su> lichSuList=new ArrayList<>();
     Context context;
     public DBHelper(Context context){
         this.context=context;
@@ -36,8 +41,8 @@ public class DBHelper extends AppCompatActivity {
     String DB_PATH="/databases/";
     public void addDB(){
         File file=context.getDatabasePath(DB_NAME);
-        if(!file.exists()){
-            copyDB();
+        if(file.exists()){
+
         }else {
             file.delete();
             copyDB();
@@ -68,7 +73,7 @@ public class DBHelper extends AppCompatActivity {
 
     public ArrayList<Obj_truyen> showAllTruyen(Context context){
         this.context=context;
-        sqLiteDatabase=openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
+        sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_truyen",null,null,null,null,null,null);
         truyenList.clear();
         while (cursor.moveToNext()){
@@ -77,7 +82,8 @@ public class DBHelper extends AppCompatActivity {
                 String theLoai=cursor.getString(2);
                 String moTa =cursor.getString(3);
                 int yeuThich=cursor.getInt(4);
-                truyenList.add(new Obj_truyen(ten,tacGia,theLoai,moTa,yeuThich));
+                String blob=cursor.getString(5);
+                truyenList.add(new Obj_truyen(ten,tacGia,theLoai,moTa,yeuThich,blob));
         }
         cursor.close();
         return truyenList;
@@ -94,7 +100,8 @@ public class DBHelper extends AppCompatActivity {
             String theLoai=cursor.getString(2);
             String moTa =cursor.getString(3);
             int yeuThich=cursor.getInt(4);
-            truyenSearchList.add(new Obj_truyen(ten,tacGia,theLoai,moTa,yeuThich));
+            String blob=cursor.getString(5);
+            truyenSearchList.add(new Obj_truyen(ten,tacGia,theLoai,moTa,yeuThich,blob));
         }
         cursor.close();
         return truyenSearchList;
@@ -111,7 +118,8 @@ public class DBHelper extends AppCompatActivity {
             String theLoai=cursor.getString(2);
             String moTa =cursor.getString(3);
             int yeuThich=cursor.getInt(4);
-            tacGiaSearchList.add(new Obj_truyen(ten,tacgia,theLoai,moTa,yeuThich));
+            String blob=cursor.getString(5);
+            tacGiaSearchList.add(new Obj_truyen(ten,tacgia,theLoai,moTa,yeuThich,blob));
         }
         cursor.close();
         return tacGiaSearchList;
@@ -128,7 +136,8 @@ public class DBHelper extends AppCompatActivity {
             String theloai=cursor.getString(2);
             String moTa =cursor.getString(3);
             int yeuThich=cursor.getInt(4);
-            theLoaiSearchList.add(new Obj_truyen(ten,tacgia,theloai,moTa,yeuThich));
+            String blob=cursor.getString(5);
+            theLoaiSearchList.add(new Obj_truyen(ten,tacgia,theloai,moTa,yeuThich,blob));
         }
         cursor.close();
         return theLoaiSearchList;
@@ -145,7 +154,7 @@ public class DBHelper extends AppCompatActivity {
         cursor.close();
         return theLoaiList;
     }
-    public ArrayList<Obj_chuong> chuongList(String truyen,Context context){
+    public ArrayList<Obj_chuong> showAllChuongList(String truyen,Context context){
         this.context=context;
         sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
         Cursor cursor=sqLiteDatabase.query("table_chuong",null,"truyen=?",new String[]{truyen},null,null,null);
@@ -171,7 +180,8 @@ public class DBHelper extends AppCompatActivity {
             String theloai=cursor.getString(2);
             String moTa =cursor.getString(3);
             int yeuThich=cursor.getInt(4);
-            yeuThichList.add(new Obj_truyen(ten,tacgia,theloai,moTa,yeuThich));
+            String blob=cursor.getString(5);
+            yeuThichList.add(new Obj_truyen(ten,tacgia,theloai,moTa,yeuThich,blob));
         }
         cursor.close();
         return yeuThichList;
@@ -186,8 +196,8 @@ public class DBHelper extends AppCompatActivity {
             String theloai=cursor.getString(2);
             String moTa =cursor.getString(3);
             int yeuThich=cursor.getInt(4);
-            System.out.println(yeuThich);
-            Obj_truyen obj_truyen=new Obj_truyen(ten,tacgia,theloai,moTa,yeuThich);
+            String blob=cursor.getString(5);
+            Obj_truyen obj_truyen=new Obj_truyen(ten,tacgia,theloai,moTa,yeuThich,blob);
             if (yeuThich==0){
                 ContentValues values=new ContentValues();
                 values.put("yeuthich",1);
@@ -230,5 +240,45 @@ public class DBHelper extends AppCompatActivity {
                 break;
         }
         return searchBarList;
+    }
+    public void insertLichSu(Obj_chuong obj_chuong, Context context){
+        Date date=null;
+        this.context=context;
+        sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
+        ContentValues values=new ContentValues();
+        values.put("truyen",obj_chuong.getTruyen());
+        values.put("chuong",obj_chuong.getChuong());
+        values.put("datetime",getDateTime());
+        long a=sqLiteDatabase.insert("table_lich_su",null,values);
+        System.out.println("addlichsu "+a);
+    }
+    public void deleteLichSu(Obj_Lich_Su obj_lich_su, Context context){
+        this.context=context;
+        sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
+        ContentValues values=new ContentValues();
+        values.put("truyen",obj_lich_su.getTen());
+        values.put("chuong",obj_lich_su.getChuong());
+        long a=sqLiteDatabase.delete("table_lich_su","truyen='"+obj_lich_su.getTen()+"' and chuong="+obj_lich_su.getChuong()+" and datetime= '"+obj_lich_su.getTime()+"'",new String[]{});
+        System.out.println("dellichsu "+a);
+    }
+    public ArrayList<Obj_Lich_Su> showLichSuList(Context context){
+        this.context=context;
+        sqLiteDatabase=context.openOrCreateDatabase(DB_NAME,MODE_PRIVATE,null);
+        Cursor cursor=sqLiteDatabase.query("table_lich_su",null,null,null,null,null,null);
+        lichSuList.clear();
+        while (cursor.moveToNext()){
+            String truyen=cursor.getString(0);
+            String time=cursor.getString(2);
+            int chuong=cursor.getInt(1);
+            lichSuList.add(new Obj_Lich_Su(truyen,chuong,time));
+        }
+        cursor.close();
+        return lichSuList;
+    }
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }

@@ -10,4 +10,36 @@ public class Obj_chuong {
         this.tenChuong = tenChuong;
         this.noiDung = noiDung;
     }
+
+    public int getChuong() {
+        return chuong;
+    }
+
+    public void setChuong(int chuong) {
+        this.chuong = chuong;
+    }
+
+    public String getTruyen() {
+        return truyen;
+    }
+
+    public void setTruyen(String truyen) {
+        this.truyen = truyen;
+    }
+
+    public String getTenChuong() {
+        return tenChuong;
+    }
+
+    public void setTenChuong(String tenChuong) {
+        this.tenChuong = tenChuong;
+    }
+
+    public String getNoiDung() {
+        return noiDung;
+    }
+
+    public void setNoiDung(String noiDung) {
+        this.noiDung = noiDung;
+    }
 }

@@ -70,7 +70,7 @@ public class Doc_Truyen_Fragment extends Fragment {
             textView5 = (TextView) convertView.findViewById(R.id.tvTheloai);
             textView3.setText(truyenList.get(position).ten);
             textView4.setText(truyenList.get(position).tacGia);
-            textView5.setText(truyenList.get(position).theLoai);
+            imageView.setImageBitmap(truyenList.get(position).getBitmap());
             return convertView;
 
         }
@@ -88,7 +88,8 @@ public class Doc_Truyen_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_doc__truyen_, container, false);
         initView(view);
         objTruyens = new ArrayList<>();
-        objTruyens = dbHelper.searchByTruyen("",getActivity());
+        objTruyens = dbHelper.showAllTruyen(getActivity());
+        System.out.println(objTruyens.size());
         DoctruyenAdapter adapter = new DoctruyenAdapter(getActivity(),objTruyens);
         lvDoctruyen.setAdapter(adapter);
         lvDoctruyen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
