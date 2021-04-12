@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,6 @@ public class Doc_Truyen_Fragment extends Fragment {
     private ListView lvDoctruyen;
     private DBHelper dbHelper  =new DBHelper(getActivity());;
     private List<Obj_truyen> objTruyens;
-
     public class DoctruyenAdapter extends BaseAdapter {
         private Context context;
         private List<Obj_truyen> truyenList;
@@ -64,10 +64,10 @@ public class Doc_Truyen_Fragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_truyen, parent, false);
-            imageView = (ImageView) convertView.findViewById(R.id.imageView);
-            textView3 = (TextView) convertView.findViewById(R.id.textView3);
-            textView4 = (TextView) convertView.findViewById(R.id.textView4);
-            textView5 = (TextView) convertView.findViewById(R.id.textView5);
+            imageView = (ImageView) convertView.findViewById(R.id.imgAnh);
+            textView3 = (TextView) convertView.findViewById(R.id.tvTentruyen);
+            textView4 = (TextView) convertView.findViewById(R.id.tvTacgia);
+            textView5 = (TextView) convertView.findViewById(R.id.tvTheloai);
             textView3.setText(truyenList.get(position).ten);
             textView4.setText(truyenList.get(position).tacGia);
             textView5.setText(truyenList.get(position).theLoai);
@@ -79,6 +79,7 @@ public class Doc_Truyen_Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -90,6 +91,14 @@ public class Doc_Truyen_Fragment extends Fragment {
         objTruyens = dbHelper.searchByTruyen("",getActivity());
         DoctruyenAdapter adapter = new DoctruyenAdapter(getActivity(),objTruyens);
         lvDoctruyen.setAdapter(adapter);
+        lvDoctruyen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,new DetailTruyenFragment()).addToBackStack(null).commit();
+
+            }
+        });
+
         return view;
     }
 
