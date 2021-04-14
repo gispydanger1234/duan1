@@ -5,10 +5,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -19,6 +22,7 @@ import com.melnykov.fab.ObservableScrollView;
 import com.melnykov.fab.ScrollDirectionListener;
 
 import java.util.List;
+import java.util.Locale;
 
 
 public class DocTruyenFragment extends Fragment implements View.OnClickListener {
@@ -28,10 +32,15 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
     private ObservableScrollView scrollView;
     private int pos;
 
+    TextToSpeech t1;
+    Button btn;
+    boolean isplaying=false;
     public DocTruyenFragment(List<Chuong> chuongList, int pos) {
         this.chuongList = chuongList;
         this.pos = pos;
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,9 +52,30 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
         fabVisible();
         fabNext.setOnClickListener(this);
         fabPre.setOnClickListener(this);
+        t1= new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+if (status!=TextToSpeech.ERROR){
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        t1.setLanguage(Locale.forLanguageTag("vi-VN"));
+    }
+}
+            }
+        });
+btn=view.findViewById(R.id.btn);
+btn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+String tospeak=chuongList.get(pos).getNoiDung();
+t1.speak(tospeak,TextToSpeech.QUEUE_FLUSH,null);
+    }
+});
         return view;
 
+
+
     }
+
 
 
     @Override
@@ -99,5 +129,6 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
             fabNext.setVisibility(View.VISIBLE);
         }
     }
+
 
 }
