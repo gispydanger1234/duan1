@@ -149,7 +149,7 @@ public class DBHelper extends AppCompatActivity {
         return theLoaiSearchList;
     }
 
-    public ArrayList<TheLoai> theLoaiList(Context context) {
+    public ArrayList<TheLoai> showAllTheLoaiList(Context context) {
         this.context = context;
         sqLiteDatabase = context.openOrCreateDatabase(DB_NAME, MODE_PRIVATE, null);
         Cursor cursor = sqLiteDatabase.query("table_the_loai", null, null, null, null, null, null);

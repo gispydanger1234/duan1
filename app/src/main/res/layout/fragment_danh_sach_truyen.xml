@@ -14,7 +14,7 @@
         android:background="#585A4F">
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/edtSearch"
             android:layout_width="326dp"
             android:layout_height="45dp"
             android:layout_marginStart="2dp"
@@ -26,43 +26,46 @@
             android:hint="Tìm Kiếm..."
             android:inputType="textPersonName"
             android:textAlignment="center"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintEnd_toStartOf="@+id/imgSearch"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/edtBy"
             android:layout_width="114dp"
             android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/border_01"
+            android:editable="false"
             android:ems="10"
             android:fontFamily="@font/sitka_banner"
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-            tools:text="Tên Truyện" />
+            app:layout_constraintTop_toBottomOf="@+id/edtSearch"
+            android:text="Tên Truyện"/>
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/edtCategory"
             android:layout_width="134dp"
             android:layout_height="38dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/border_01"
+            android:editable="false"
             android:ems="10"
             android:fontFamily="@font/sitka_banner"
             android:inputType="textPersonName"
             android:textAlignment="center"
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
-            tools:text="Tất cả" />
+            app:layout_constraintTop_toBottomOf="@+id/edtSearch"
+            android:text="Tất Cả"/>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgSearch"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
@@ -82,8 +85,8 @@
             android:text="Theo"
             android:textColor="#FFFFFF"
             android:textSize="15dp"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintStart_toStartOf="@+id/edtSearch"
+            app:layout_constraintTop_toBottomOf="@+id/edtSearch" />
 
         <TextView
             android:id="@+id/textView2"
@@ -95,8 +98,8 @@
             android:text="Thể Loại"
             android:textColor="#FFFFFF"
             android:textSize="15dp"
-            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintStart_toEndOf="@+id/edtBy"
+            app:layout_constraintTop_toBottomOf="@+id/edtSearch" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

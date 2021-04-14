@@ -17,9 +17,9 @@
     android:layout_margin="8dp"
     android:textSize="20dp"
     />
-    <ListView
-        android:id="@+id/rvLichsu"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 </LinearLayout>

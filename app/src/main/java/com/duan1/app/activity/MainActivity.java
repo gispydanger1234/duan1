@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.itemLichSu:
                     selectedFragment= new LichSuFragment();
+                    dbHelper.insertLichSu(dbHelper.showAllChuongList(dbHelper.showAllTruyen(getApplicationContext()).get(0).getTen(),getApplicationContext()).get(0),getApplicationContext());
+                    System.out.println(dbHelper.showLichSuList(getApplicationContext()).size());
                     break;
                 case R.id.itemYeuThich:
                     selectedFragment= new YeuThichFragment();

@@ -11,18 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duan1.app.R;
+import com.duan1.app.model.LichSu;
 import com.duan1.app.model.Truyen;
 
 import java.util.List;
 
 public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHolder> {
     private Context context;
-    private List<Truyen> truyenList;
+    private List<LichSu> lichSuList;
+    private LichSuOnClick onClick;
 
 
-    public LichSuAdapter(Context context, List<Truyen> truyenList) {
+    public LichSuAdapter(Context context, List<LichSu> lichSuList, LichSuOnClick onClick) {
         this.context = context;
-        this.truyenList = truyenList;
+        this.lichSuList = lichSuList;
+        this.onClick=onClick;
     }
     @NonNull
     @Override
@@ -32,13 +35,19 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LichSuHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull LichSuHolder holder, final int position) {
+        holder.tvLichsu.setText(lichSuList.get(position).getTen()+" chương "+lichSuList.get(position).getChuong());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClick.onclick(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return truyenList.size();
+        return lichSuList.size();
     }
 
     public static class LichSuHolder extends RecyclerView.ViewHolder {
@@ -50,5 +59,8 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
             imgXoa = (ImageView) itemView.findViewById(R.id.imgXoa);
             tvLichsu = (TextView) itemView.findViewById(R.id.tvLichsu);
         }
+    }
+    public interface LichSuOnClick {
+        void onclick(int pos);
     }
 }

@@ -20,10 +20,10 @@ import java.util.List;
 public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenHolder> {
     private Context context;
     private List<Truyen> truyenList;
-    private OnClick onClick;
+    private TruyenOnClick onClick;
 
 
-    public TruyenAdapter(Context context, List<Truyen> truyenList, OnClick onClick) {
+    public TruyenAdapter(Context context, List<Truyen> truyenList, TruyenOnClick onClick) {
         this.context = context;
         this.truyenList = truyenList;
         this.onClick = onClick;
@@ -64,7 +64,7 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenHold
         }
     }
 
-    public interface OnClick {
+    public interface TruyenOnClick {
         void onclick(int pos);
     }
 }

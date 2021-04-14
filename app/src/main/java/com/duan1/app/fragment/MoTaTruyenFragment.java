@@ -35,11 +35,9 @@ public class MoTaTruyenFragment extends Fragment {
     private DBHelper dbHelper = new DBHelper(getActivity());
     private List<Chuong> obj_chuongs;
     public Truyen obj_truyen;
-
     public MoTaTruyenFragment(Truyen obj_truyen) {
         this.obj_truyen = obj_truyen;
     }
-
 
 
     @Override
