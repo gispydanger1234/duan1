@@ -34,7 +34,7 @@ public class MoTaTruyenFragment extends Fragment {
     private ListView lvChuong;
     private DBHelper dbHelper = new DBHelper(getActivity());
     private List<Chuong> obj_chuongs;
-    public Truyen obj_truyen;
+    public Truyen obj_truyen,obj_truyen1;
     public MoTaTruyenFragment(Truyen obj_truyen) {
         this.obj_truyen = obj_truyen;
     }
@@ -55,6 +55,13 @@ public class MoTaTruyenFragment extends Fragment {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new DocTruyenFragment( obj_chuongs, position)).addToBackStack(null).commit();
             }
         });
+        obj_truyen1=(dbHelper.searchByTruyen(obj_truyen.getTen(),getContext()).get(0));
+        if (obj_truyen1.getYeuThich()==1){
+            imgYeuthich.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite));
+        }else if(obj_truyen1.getYeuThich()==0){
+            imgYeuthich.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border));
+        }
+
         imgAnh.setImageBitmap(obj_truyen.getBitmap());
         tvTentruyen.setText(obj_truyen.getTen());
         tvTacgia.setText(obj_truyen.getTacGia());
@@ -63,7 +70,14 @@ public class MoTaTruyenFragment extends Fragment {
         imgYeuthich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imgYeuthich.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite));
+                obj_truyen1=(dbHelper.searchByTruyen(obj_truyen.getTen(),getContext()).get(0));
+                if (obj_truyen1.getYeuThich()==1){
+                    dbHelper.updateTruyenYeuThich(obj_truyen.getTen(),getContext());
+                    imgYeuthich.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border));
+                }else if(obj_truyen1.getYeuThich()==0){
+                    dbHelper.updateTruyenYeuThich(obj_truyen.getTen(),getContext());
+                    imgYeuthich.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite));
+                }
             }
         });
         return view;

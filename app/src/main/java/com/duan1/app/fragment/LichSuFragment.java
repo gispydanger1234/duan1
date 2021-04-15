@@ -30,14 +30,12 @@ public class LichSuFragment extends Fragment {
         LichSuAdapter lichSuAdapter=new LichSuAdapter(getContext(), dbHelper.showLichSuList(getContext()), new LichSuAdapter.LichSuOnClick() {
             @Override
             public void onclick(int pos) {
-                getFragmentManager().beginTransaction().replace(
-                        R.id.fragment_container, new DocTruyenFragment(
-                                dbHelper.showAllChuongList(
-                                        dbHelper.showLichSuList(getContext()).get(pos).getTen(),getContext()),pos)).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new DocTruyenFragment( dbHelper.showAllChuongList(dbHelper.showLichSuList(getContext()).get(pos).getTen(),getContext()), pos)).addToBackStack(null).commit();
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(lichSuAdapter);
+        System.out.println(getContext());
         return view;
 
     }

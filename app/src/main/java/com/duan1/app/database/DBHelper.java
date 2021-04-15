@@ -262,7 +262,6 @@ public class DBHelper extends AppCompatActivity {
         values.put("chuong", obj_chuong.getChuong());
         values.put("datetime", getDateTime());
         long a = sqLiteDatabase.insert("table_lich_su", null, values);
-        System.out.println("addlichsu " + a);
     }
 
     public void deleteLichSu(LichSu obj_lich_su, Context context) {

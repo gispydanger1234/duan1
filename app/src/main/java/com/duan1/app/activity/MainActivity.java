@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigationView=findViewById(R.id.bottomNavi);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new DanhSachTruyenFragment()).commit();
         navigationView.setOnNavigationItemSelectedListener(navListener);
-
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener= new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.itemLichSu:
                     selectedFragment= new LichSuFragment();
-                    dbHelper.insertLichSu(dbHelper.showAllChuongList(dbHelper.showAllTruyen(getApplicationContext()).get(0).getTen(),getApplicationContext()).get(0),getApplicationContext());
                     System.out.println(dbHelper.showLichSuList(getApplicationContext()).size());
                     break;
                 case R.id.itemYeuThich:

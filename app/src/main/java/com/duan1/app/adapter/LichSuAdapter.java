@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duan1.app.R;
+import com.duan1.app.database.DBHelper;
 import com.duan1.app.model.LichSu;
 import com.duan1.app.model.Truyen;
 
@@ -20,10 +21,11 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
     private Context context;
     private List<LichSu> lichSuList;
     private LichSuOnClick onClick;
+    public DBHelper dbHelper=new DBHelper(context);
 
 
-    public LichSuAdapter(Context context, List<LichSu> lichSuList, LichSuOnClick onClick) {
-        this.context = context;
+    public LichSuAdapter(Context ccontext, List<LichSu> lichSuList, LichSuOnClick onClick) {
+        this.context = ccontext;
         this.lichSuList = lichSuList;
         this.onClick=onClick;
     }
@@ -41,6 +43,13 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
             @Override
             public void onClick(View v) {
                 onClick.onclick(position);
+            }
+        });
+        holder.imgXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbHelper.deleteLichSu(lichSuList.get(position),context);
+                notifyDataSetChanged();
             }
         });
     }

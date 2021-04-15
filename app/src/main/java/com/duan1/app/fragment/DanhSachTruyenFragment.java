@@ -44,12 +44,6 @@ public class DanhSachTruyenFragment extends Fragment implements DialogSearchBy.S
         initView(view);
         objTruyens = new ArrayList<>();
         objTruyens = dbHelper.showAllTruyen(getActivity());
-//        TruyenAdapter adapter = new TruyenAdapter(getActivity(), objTruyens, new TruyenAdapter.OnClick() {
-//            @Override
-//            public void TruyenOnclick(int pos) {
-//                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MoTaTruyenFragment(objTruyens.get(pos))).addToBackStack(null).commit();
-//            }
-//        });
         TruyenAdapter truyenAdapter=new TruyenAdapter(getContext(), objTruyens, new TruyenAdapter.TruyenOnClick() {
             @Override
             public void onclick(int pos) {

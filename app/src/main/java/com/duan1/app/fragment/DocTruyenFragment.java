@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.duan1.app.R;
+import com.duan1.app.database.DBHelper;
 import com.duan1.app.model.Chuong;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
@@ -26,6 +27,7 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
     private FloatingActionButton fabNext, fabPre;
     private List<Chuong> chuongList;
     private ObservableScrollView scrollView;
+    public DBHelper dbHelper;
     private int pos;
 
     public DocTruyenFragment(List<Chuong> chuongList, int pos) {
@@ -40,14 +42,12 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
         initView(view);
         tvNoiDung.setText(chuongList.get(pos).getNoiDung());
         tvTenChuong.setText(chuongList.get(pos).getTenChuong());
+        dbHelper=new DBHelper(getContext());
         fabVisible();
         fabNext.setOnClickListener(this);
         fabPre.setOnClickListener(this);
         return view;
-
     }
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -60,6 +60,7 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
                             .replace(R.id.fragment_container, new DocTruyenFragment(chuongList, pos + 1))
                             .addToBackStack(null)
                             .commit();
+                    dbHelper.insertLichSu(chuongList.get(pos +1),getContext());
                 }
                 break;
             case R.id.fabPre:
@@ -71,6 +72,7 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
                             .replace(R.id.fragment_container, new DocTruyenFragment(chuongList, pos - 1))
                             .addToBackStack(null)
                             .commit();
+                    dbHelper.insertLichSu(chuongList.get(pos -1),getContext());
                 }
 
                 break;
