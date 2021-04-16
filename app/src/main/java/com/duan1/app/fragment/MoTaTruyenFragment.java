@@ -53,6 +53,7 @@ public class MoTaTruyenFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new DocTruyenFragment( obj_chuongs, position)).addToBackStack(null).commit();
+            dbHelper.insertLichSu(obj_chuongs.get(position),getActivity());
             }
         });
         obj_truyen1=(dbHelper.searchByTruyen(obj_truyen.getTen(),getContext()).get(0));
