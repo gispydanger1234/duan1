@@ -5,10 +5,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import com.melnykov.fab.ObservableScrollView;
 import com.melnykov.fab.ScrollDirectionListener;
 
 import java.util.List;
+import java.util.Locale;
 
 
 public class DocTruyenFragment extends Fragment implements View.OnClickListener {
@@ -27,6 +30,11 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
     private List<Chuong> chuongList;
     private ObservableScrollView scrollView;
     private int pos;
+    private TextToSpeech t1;
+    private Button button;
+
+    private boolean isplaying = false;
+
 
     public DocTruyenFragment(List<Chuong> chuongList, int pos) {
         this.chuongList = chuongList;
@@ -43,6 +51,30 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
         fabVisible();
         fabNext.setOnClickListener(this);
         fabPre.setOnClickListener(this);
+
+        t1 = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                        t1.setLanguage(Locale.forLanguageTag("vi-VN"));
+                    }
+                }
+            }
+        });
+        button = view.findViewById(R.id.btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isplaying) {
+                    onPause();
+                } else {
+                    play();
+                }
+                isplaying = !isplaying;
+            }
+        });
         return view;
 
     }
@@ -98,6 +130,18 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
         } else {
             fabNext.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void play() {
+        String tospeak = chuongList.get(pos).getNoiDung();
+        t1.speak(tospeak, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    public void onPause() {
+        if (t1 != null) {
+            t1.stop();
+        }
+        super.onPause();
     }
 
 }

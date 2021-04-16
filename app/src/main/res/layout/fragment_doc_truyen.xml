@@ -57,11 +57,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:background="@drawable/ic_speech"
         android:id="@+id/btn"
         android:layout_width="98dp"
         android:layout_height="55dp"
-        android:background="@drawable/speaker"
-        android:text="Button"
+
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fabNext"
         app:layout_constraintHorizontal_bias="0.5"
