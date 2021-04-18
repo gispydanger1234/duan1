@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarSize="4dp"
-    android:background="@color/bg_color">
+    android:background="@color/bg_color"
+    android:scrollbarSize="4dp">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
         android:layout_width="128dp"
         android:layout_height="150dp"
-        android:layout_marginTop="200dp"
         android:src="@drawable/zero"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -51,7 +52,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/msgothic"
-        android:text="THANHBDPH0822"
+        android:text="PHUDQPH09495"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -61,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/msgothic"
-        android:text="THANHBDPH0822"
+        android:text="TUYENTDPH08192"
         app:layout_constraintBottom_toTopOf="@+id/tv3"
         app:layout_constraintEnd_toEndOf="parent" />
 

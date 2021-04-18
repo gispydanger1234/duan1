@@ -42,7 +42,7 @@ public class ChuongAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.item_chuong, parent, false);
         tvChuong = (TextView) convertView.findViewById(R.id.tvChuong);
-        tvChuong.setText(chuongList.get(position).getChuong() + "  " + chuongList.get(position).getTenChuong());
+        tvChuong.setText(chuongList.get(position).getTruyen()+" Chương "+chuongList.get(position).getChuong());
         return convertView;
     }
 }

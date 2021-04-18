@@ -90,6 +90,7 @@ public class DBHelper extends AppCompatActivity {
             truyenList.add(new Truyen(ten, tacGia, theLoai, moTa, yeuThich, image));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return truyenList;
     }
 
@@ -108,6 +109,7 @@ public class DBHelper extends AppCompatActivity {
             truyenSearchList.add(new Truyen(ten, tacGia, theLoai, moTa, yeuThich,image));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return truyenSearchList;
     }
 
@@ -127,6 +129,7 @@ public class DBHelper extends AppCompatActivity {
             tacGiaSearchList.add(new Truyen(ten, tacgia, theLoai, moTa, yeuThich,image));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return tacGiaSearchList;
     }
 
@@ -146,6 +149,7 @@ public class DBHelper extends AppCompatActivity {
             theLoaiSearchList.add(new Truyen(ten, tacgia, theloai, moTa, yeuThich,image));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return theLoaiSearchList;
     }
 
@@ -159,6 +163,7 @@ public class DBHelper extends AppCompatActivity {
             theLoaiList.add(new TheLoai(theLoai));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return theLoaiList;
     }
 
@@ -175,6 +180,7 @@ public class DBHelper extends AppCompatActivity {
             chuongList.add(new Chuong(chuong, truyenSearch, tenChuong, noiDung));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return chuongList;
     }
 
@@ -193,6 +199,7 @@ public class DBHelper extends AppCompatActivity {
             yeuThichList.add(new Truyen(ten, tacgia, theloai, moTa, yeuThich,image));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return yeuThichList;
     }
 
@@ -219,6 +226,7 @@ public class DBHelper extends AppCompatActivity {
         }
 
         cursor.close();
+        sqLiteDatabase.close();
         return null;
     }
 
@@ -232,7 +240,7 @@ public class DBHelper extends AppCompatActivity {
                     for (int j = 0; j < searchByTheLoai(theLoai, context).size(); j++) {
                         Truyen obj_truyen1 = searchByTheLoai(theLoai, context).get(j);
                         if (obj_truyen.getTen().equals(obj_truyen1.getTen())) {
-                            searchBarList.add(obj_truyen);
+                            searchBarList.add(obj_truyen1);
                         }
                     }
                 }
@@ -271,7 +279,7 @@ public class DBHelper extends AppCompatActivity {
         values.put("truyen", obj_lich_su.getTen());
         values.put("chuong", obj_lich_su.getChuong());
         long a = sqLiteDatabase.delete("table_lich_su", "truyen='" + obj_lich_su.getTen() + "' and chuong=" + obj_lich_su.getChuong() + " and datetime= '" + obj_lich_su.getTime() + "'", new String[]{});
-        System.out.println("dellichsu " + a);
+        sqLiteDatabase.close();
     }
 
     public ArrayList<LichSu> showLichSuList(Context context) {
@@ -286,6 +294,7 @@ public class DBHelper extends AppCompatActivity {
             lichSuList.add(new LichSu(truyen, chuong, time));
         }
         cursor.close();
+        sqLiteDatabase.close();
         return lichSuList;
     }
 

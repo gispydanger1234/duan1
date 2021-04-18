@@ -50,6 +50,7 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
             public void onClick(View v) {
                 dbHelper.deleteLichSu(lichSuList.get(position),context);
                 notifyDataSetChanged();
+                updateList(dbHelper.showLichSuList(context));
             }
         });
     }
@@ -71,5 +72,9 @@ public class LichSuAdapter extends RecyclerView.Adapter<LichSuAdapter.LichSuHold
     }
     public interface LichSuOnClick {
         void onclick(int pos);
+    }
+    public void updateList(List<LichSu> todolist){
+        this.lichSuList = todolist;
+        notifyDataSetChanged();
     }
 }

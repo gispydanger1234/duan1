@@ -36,6 +36,7 @@ public class LichSuFragment extends Fragment {
                                 dbHelper.showAllChuongList(
                                         dbHelper.showLichSuList(getContext()).get(pos).getTen(),getContext()), dbHelper.showLichSuList(getContext()).get(pos).getChuong()-1))
                         .addToBackStack(null).commit();
+                System.out.println(dbHelper.showLichSuList(getContext()).size());
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.duan1.app.R;
+import com.duan1.app.database.DBHelper;
 import com.duan1.app.model.Chuong;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
@@ -32,7 +33,7 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
     private int pos;
     private TextToSpeech t1;
     private Button button;
-
+    public DBHelper dbHelper;
     private boolean isplaying = false;
 
 
@@ -51,6 +52,7 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
         fabVisible();
         fabNext.setOnClickListener(this);
         fabPre.setOnClickListener(this);
+        dbHelper=new DBHelper(getContext());
 
         t1 = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -67,6 +69,8 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("doccccc");
+                play();
                 if (isplaying) {
                     onPause();
                 } else {
@@ -92,6 +96,7 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
                             .replace(R.id.fragment_container, new DocTruyenFragment(chuongList, pos + 1))
                             .addToBackStack(null)
                             .commit();
+                    dbHelper.insertLichSu(chuongList.get(pos +1),getContext());
                 }
                 break;
             case R.id.fabPre:
@@ -104,7 +109,7 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
                             .addToBackStack(null)
                             .commit();
                 }
-
+                dbHelper.insertLichSu(chuongList.get(pos -1),getContext());
                 break;
         }
     }

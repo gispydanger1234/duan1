@@ -103,8 +103,6 @@ public class DanhSachTruyenFragment extends Fragment implements DialogSearchBy.S
                 rvDoctruyen.setLayoutManager(new GridLayoutManager(getActivity(),2));
                 rvDoctruyen.setHasFixedSize(true);
                 rvDoctruyen.setAdapter(adapter);
-                System.out.println(dbHelper.searchBySearchBar(timkiem,theo,theloai,getContext()).size());
-                System.out.println(dbHelper.searchByTheLoai("",getContext()).size());
             }
         });
         return view;
