@@ -69,7 +69,6 @@ public class DBHelper extends AppCompatActivity {
             outputStream.flush();
             outputStream.close();
             inputStream.close();
-            Log.e("Lỗi xịt", "vcc");
         } catch (Exception e) {
             Log.e("Lỗi", e.toString());
         }

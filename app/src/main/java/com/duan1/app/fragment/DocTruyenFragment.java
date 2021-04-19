@@ -21,6 +21,7 @@ import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
 import com.melnykov.fab.ScrollDirectionListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -69,7 +70,6 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("doccccc");
                 play();
                 if (isplaying) {
                     onPause();
@@ -138,8 +138,31 @@ public class DocTruyenFragment extends Fragment implements View.OnClickListener 
     }
 
     private void play() {
-        String tospeak = chuongList.get(pos).getNoiDung();
-        t1.speak(tospeak, TextToSpeech.QUEUE_FLUSH, null);
+        String textForReading = chuongList.get(pos).getNoiDung();
+        //t1.speak(tospeak, TextToSpeech.QUEUE_FLUSH, null);
+        //System.out.println(tospeak.length());
+        int dividerLimit = 3900;
+        if(textForReading.length() >= dividerLimit) {
+            int textLength = textForReading.length();
+            ArrayList<String> texts = new ArrayList<String>();
+            int count = textLength / dividerLimit + ((textLength % dividerLimit == 0) ? 0 : 1);
+            int start = 0;
+            int end = textForReading.indexOf(" ", dividerLimit);
+            for(int i = 1; i<=count; i++) {
+                texts.add(textForReading.substring(start, end));
+                start = end;
+                if((start + dividerLimit) < textLength) {
+                    end = textForReading.indexOf(" ", start + dividerLimit);
+                } else {
+                    end = textLength;
+                }
+            }
+            for(int i=0; i<texts.size(); i++) {
+                t1.speak(texts.get(i), TextToSpeech.QUEUE_ADD, null);
+            }
+        } else {
+            t1.speak(textForReading, TextToSpeech.QUEUE_FLUSH, null);
+        }
     }
 
     public void onPause() {
